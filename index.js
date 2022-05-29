@@ -79,6 +79,11 @@ const ordersCollection = client.db('parts_of_solution').collection('orders');
       const tool = await toolsCollection.findOne(query);
       res.send(tool);
     });
+    app.get("/orders", async (req, res) => {
+      const orders = await ordersCollection.find().toArray();
+      res.send(orders);
+    });
+
 
     app.post("/orders", async (req, res) => {
       const orders = req.body;
@@ -86,11 +91,7 @@ const ordersCollection = client.db('parts_of_solution').collection('orders');
       const result = await ordersCollection.insertOne(orders);
       res.send(result);
     });
-    app.get("/orders", async (req, res) => {
-      const orders = await ordersCollection.find().toArray();
-      res.send(orders);
-    });
-
+  
 
   app.put('/user/:email', async (req, res) => {
     const email = req.params.email;
